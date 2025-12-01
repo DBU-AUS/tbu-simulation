@@ -1,0 +1,39 @@
+{
+  "generated_utc": "2025-12-01",
+  "version": "3.0",
+  "description": "TBU simulation parameters matching FoP manuscript",
+  "physical_parameters": {
+    "kappa": 1.55e-11,
+    "kappa_formula": "(pi^2/2)(lambda/Lc)^2",
+    "chi_geom": 0.49,
+    "lambda_opt_m": 532e-9,
+    "Lc_m": 0.30,
+    "note": "chi_geom=0.49 gives eps=2.30e-6 at M=1, d=0.25 (Table 5)"
+  },
+  "detection_targets": {
+    "epsilon_phys": 9.31e-7,
+    "hourly_std": 1.6e-6,
+    "hourly_SNR": 0.58,
+    "hours_for_5sigma": 74,
+    "total_photons": 1.2e12,
+    "photon_rate_per_s": 4.5e6
+  },
+  "calibration": {
+    "K_beta2_per_epsilon": 1154.21,
+    "beta_target": 1.075e-3
+  },
+  "scaling_predictions": {
+    "mass_slope_per_kg": 2.30e-6,
+    "mass_slope_uncertainty": 0.09e-6,
+    "R_squared": 0.9973,
+    "note": "Slope at d=0.25m"
+  },
+  "files_generated": [
+    "TBU_MC_10000_runs_null.csv",
+    "TBU_MC_10000_runs_signal.csv",
+    "TBU_timeseries_run.csv",
+    "TBU_extended_simulation_results.csv",
+    "TBU_alt_mechanisms_vs_TBU.csv",
+    "TBU_entangled_two_path.csv"
+  ]
+}
