@@ -120,12 +120,13 @@ print(f"SNR: {df.eps_hat.mean()/df.eps_hat.std():.2f}")  # → 0.58
 
 If using this code or data:
 
+```bibtex
 @article{TBU2025,
-  title={The Everywhen: Unifying Quantum and Classical Mechanics 
-         through 4D Thermodynamics},
+  title={The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics},
   author={Artz, Gavin},
   year={2025}
 }
+```
 
 ## License
 
