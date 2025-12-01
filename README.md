@@ -1,6 +1,6 @@
 # TBU Simulation Repository
 
-Monte Carlo validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** (submitted to Foundations of Physics).
+Monte Carlo validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** 
 
 ## Quick Start
 
