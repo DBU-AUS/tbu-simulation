@@ -76,6 +76,7 @@ Key validation: Mass slope at d = 0.25 m
 - Slope: (2.30 ± 0.09) × 10⁻⁶ kg⁻¹
 - R² = 0.9973
 - Intercept consistent with zero
+**Note on uncertainties:** `eps_measured` represents the noiseless theoretical prediction. Quoted uncertainties in the paper (e.g., ±0.09 × 10⁻⁶ kg⁻¹) derive from regressions on `eps_noisy` (which includes 8% measurement noise) and repeated Monte Carlo runs.
 
 ### TBU_alt_mechanisms_vs_TBU.csv
 Mechanism discrimination test (Section 7.6.1). Distinguishes TBU from systematics:
