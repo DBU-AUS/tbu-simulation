@@ -2,6 +2,8 @@
 
 Monte Carlo validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** 
 
+https://doi.org/10.5281/zenodo.17807599
+
 ## Quick Start
 
 ```bash
