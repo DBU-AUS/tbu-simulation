@@ -1,6 +1,6 @@
 # TBU Simulation Repository
 
-Monte Carlo validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** 
+Monte Carlo validation suite for **"\title{Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions}"** 
 
 <a href="https://doi.org/10.5281/zenodo.17807599"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17807599.svg" alt="DOI"></a>
 
@@ -125,7 +125,7 @@ If using this code or data:
 
 ```bibtex
 @article{TBU2025,
-  title={The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics},
+  title={\title{Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions}},
   author={Artz, Gavin},
   year={2025}
 }
