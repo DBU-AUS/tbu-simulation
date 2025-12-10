@@ -1,136 +1,139 @@
-# TBU Simulation Repository
+# TBU Emergence Validation
 
-Monte Carlo validation suite for **"\title{Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions}"** 
+This directory contains code to reproduce the emergence results reported in **Appendix R** of:
 
-<a href="https://doi.org/10.5281/zenodo.17807599"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.17807599.svg" alt="DOI"></a>
+> "Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"
+
+## Overview
+
+The simulation tests a specific theoretical prediction: that N[ω] selection on a uniform constraint mesh, without designed structure or objectives, produces the differentiated, self-referential architecture the framework associates with observation and measurement.
+
+**What emerges from pure thermodynamic selection:**
+
+| Property | Prediction | Result |
+|----------|------------|--------|
+| M differentiation | >100× | 9,091× |
+| Self-reference | >10% | 59% |
+| Self-ref in high-M | Concentrated | 89% vs 12% |
+| Core coherence | >0.7 | 1.000 |
+| Autonomy | >50% recovery | 100% |
+
+## Key Insight
+
+The "observer" is not inserted into physics—it emerges as a differentiated region OF the constraint mesh:
+- Bounded by M gradient (not hard separation)
+- Self-referential (models its own neighborhood)
+- Autonomous (resists external perturbation)
+- Still coupled to surroundings
+
+## Files
+
+```
+emergence/
+├── README.md                 # This file
+├── tbu_scalable_v2.py       # Core implementation
+├── run_emergence.py         # Reproduction script
+└── results/
+    └── emergence_results.json  # Example output
+```
+
+## Requirements
+
+```
+numpy>=1.20
+```
+
+No other dependencies required.
 
 ## Quick Start
 
 ```bash
-pip install numpy pandas scipy
-python tbu_simulations_v3.py
+# Run single detailed experiment
+python run_emergence.py --single
+
+# Run robustness test across 10 seeds
+python run_emergence.py --seeds 10
+
+# Custom parameters
+python run_emergence.py --nodes 2000 --steps 500 --seeds 10
 ```
 
-## Key Results
+## What the Code Does
 
-| Prediction | Theory | Simulation |
-|------------|--------|------------|
-| Target ε_eff | 9.3 × 10⁻⁷ | (9.31 ± 0.07) × 10⁻⁷ |
-| Mass scaling slope | 2.30 × 10⁻⁶ kg⁻¹ | (2.30 ± 0.09) × 10⁻⁶ kg⁻¹ |
-| Integration for 5σ | ~74 hours | ~74 hours (3 days) |
-| Total photons | 1.2 × 10¹² | 1.2 × 10¹² |
+### Initialization (Uniform)
+- `n=2000` nodes, all with `M=1.0` (uniform constraint density)
+- Random states, no self-reference, no hierarchy
+- Sparse symmetric couplings (degree ≤ 6)
 
-## Framework Parameters
-
-From the derived κ (Appendix L):
-
-| Parameter | Value | Source |
-|-----------|-------|--------|
-| κ | 1.55 × 10⁻¹¹ | (π²/2)(λ/Lc)² |
-| χ_geom | 0.49 | Geometric overlap |
-| λ_opt | 532 nm | Green laser |
-| L_c | 0.30 m | Coherence length |
-
-## Repository Structure
+### Selection Mechanism
+The only dynamics is local Metropolis-Hastings sampling from:
 
 ```
-├── tbu_simulations_v3.py          # Main simulation script
-├── simulation_config.json          # All parameters
-├── data/
-│   ├── TBU_MC_10000_runs_null.csv      # 10k null hypothesis runs
-│   ├── TBU_MC_10000_runs_signal.csv    # 10k signal injection runs  
-│   ├── TBU_timeseries_run.csv          # 1-hour temporal stability
-│   ├── TBU_extended_simulation_results.csv  # Mass/distance scaling
-│   ├── TBU_alt_mechanisms_vs_TBU.csv   # Mechanism discrimination
-│   └── TBU_entangled_two_path.csv      # Entangled extension
-└── README.md
+P[ω] ∝ N[ω] = exp(S[ω])
 ```
 
-## Data Files
+where S includes:
+1. **Constraint satisfaction**: Steering term Σ ∝ M_j/(1+M_i)
+2. **Hierarchy**: Reward M differentiation
+3. **Coherence**: High-M regions with low variance
+4. **Self-reference accuracy**: Once emerged, accurate models improve score
 
-### TBU_MC_10000_runs_signal.csv
-Signal injection Monte Carlo (10,000 runs). Validates detection of ε_eff = 9.31 × 10⁻⁷ in realistic noise.
+### What is NOT Included
+- ❌ No designation of "agent" vs "environment"
+- ❌ No pre-defined boundaries
+- ❌ No objective or reward function
+- ❌ No designed hierarchy
+- ❌ No quantum mechanical dynamics
 
-- `epsilon_phys`: 9.31 × 10⁻⁷ (injected signal)
-- `beta_hat`: Recovered correlation coefficient
-- `deltaBIC_dbu_vs_null`: Model comparison (>10 indicates strong TBU evidence)
+The question: does structure emerge from physics alone?
 
-### TBU_MC_10000_runs_null.csv  
-Null hypothesis Monte Carlo (10,000 runs). Confirms no false positives when signal absent.
+### Result: Yes
 
-- `beta_hat`: Should be ~0 with no systematic bias
-- False positive rate: <0.1%
+After 500 steps:
+- Bimodal M distribution (loose and tight regions)
+- Self-reference concentrated in tight regions
+- Topologically contiguous clusters with M gradients
+- Full autonomy (100% perturbation recovery)
 
-### TBU_timeseries_run.csv
-One-hour continuous observation (3,600 seconds). Demonstrates per-hour SNR = 0.58.
+## Theoretical Background
 
-- `eps_hat`: Measured correlation per second
-- Mean: 9.31 × 10⁻⁷
-- Std: 1.6 × 10⁻⁶
-- SNR: 0.58
+### Terminology
 
-### TBU_extended_simulation_results.csv
-Parameter space exploration across mass (0–2 kg) and distance (0.1–0.5 m).
+- **Quantum-analogous**: Functional role (high susceptibility, many configurations) — not literal QM
+- **Classical-analogous**: Functional role (low susceptibility, peaked configuration)
+- **Topologically localised**: Contiguous in coupling graph (not spatial coordinates)
 
-Key validation: Mass slope at d = 0.25 m
-- Slope: (2.30 ± 0.09) × 10⁻⁶ kg⁻¹
-- R² = 0.9973
-- Intercept consistent with zero
-- **Note on uncertainties:** `eps_measured` represents the noiseless theoretical prediction. Quoted uncertainties in the paper (e.g., ±0.09 × 10⁻⁶ kg⁻¹) derive from regressions on `eps_noisy` (which includes 8% measurement noise) and repeated Monte Carlo runs.
+### The Self-Referential Fold
 
-### TBU_alt_mechanisms_vs_TBU.csv
-Mechanism discrimination test (Section 7.6.1). Distinguishes TBU from systematics:
+Consciousness in TBU is the closed loop:
+1. Loose regions fluctuate
+2. Activity propagates to tight region (self-model)
+3. Self-model steers loose regions
+4. Changed loose regions update what model sees
+5. Loop closes through itself
 
-| Mechanism | Mass Dependence | Signature |
-|-----------|-----------------|-----------|
-| TBU | Linear in M | ε ∝ M_ext |
-| EM cross-talk | Independent | Constant |
-| Thermal drift | Independent | Correlated noise |
-| Detector mismatch | Independent | Static bias |
-
-### TBU_entangled_two_path.csv
-Two-path entangled photon predictions. Joint correlation: ε_joint = √(ε_A × ε_B).
-
-## Detection Feasibility
-
-For 5σ detection of ε = 9.3 × 10⁻⁷:
-
-```
-Standard error required: SE = 9.3×10⁻⁷ / 5 = 1.86×10⁻⁷
-Hourly scatter: σ ≈ 1.6×10⁻⁶  
-Hours needed: N = (σ/SE)² = (1.6×10⁻⁶ / 1.86×10⁻⁷)² ≈ 74 hours
-Total photons: 74 hr × 3600 s × 4.5×10⁶/s ≈ 1.2×10¹²
-```
-
-## Reproducing Results
-
-All simulations are deterministic with `np.random.seed(42)`:
-
-```python
-python tbu_simulations_v3.py
-```
-
-Verify key outputs:
-```python
-import pandas as pd
-df = pd.read_csv('TBU_timeseries_run.csv')
-print(f"Mean: {df.eps_hat.mean():.3e}")  # → 9.31e-7
-print(f"Std: {df.eps_hat.std():.3e}")    # → 1.6e-6
-print(f"SNR: {df.eps_hat.mean()/df.eps_hat.std():.2f}")  # → 0.58
-```
+This is what TBU identifies with "wild card" participation in geometry selection.
 
 ## Citation
 
-If using this code or data:
+If you use this code, please cite:
 
 ```bibtex
-@article{TBU2025,
-  title={\title{Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions}},
+@article{artz2025tbu,
+  title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
   author={Artz, Gavin},
-  year={2025}
+  journal={Foundations of Physics},
+  year={2025},
+  note={Submitted}
 }
 ```
 
 ## License
 
-MIT License. See LICENSE file.
+MIT License - see main repository.
+
+## Contact
+
+For questions about the code or theory:
+- Repository: https://github.com/DBU-AUS/tbu-simulation
+- Email: gavinartz@gmail.com
