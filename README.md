@@ -4,7 +4,7 @@ Simulation code and datasets for:
 
 > **"Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"**
 > 
-> Gavin Artz (2025), Submitted to *Foundations of Physics*
+> Gavin Artz (2025)
 
 ## Repository Structure
 
@@ -72,9 +72,7 @@ matplotlib>=3.4
 @article{artz2025tbu,
   title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
   author={Artz, Gavin},
-  journal={Foundations of Physics},
   year={2025},
-  note={Submitted}
 }
 ```
 
