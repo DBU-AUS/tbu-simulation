@@ -21,8 +21,11 @@ tbu-simulation/
 │   └── ...
 └── emergence/                   # Emergence validation (Appendix R)
     ├── README.md
-    ├── tbu_scalable_v2.py
-    ├── run_emergence.py
+    ├── tbu_honest.py            # Honest substrate (Levels 1–2)
+    ├── tbu_honest_extended.py   # Extended substrate (Level 3)
+    ├── tbu_honest_action.py     # Action substrate (Levels 4–5)
+    ├── tbu_honest_boundary.py   # Complete boundary (Level 6)
+    ├── tbu_honest_multiagent.py # Multi-pattern validation
     └── results/
 ```
 
@@ -41,21 +44,42 @@ Tests whether the predicted ε_eff ~ 10⁻⁶ correlations are detectable with p
 Tests whether observer-like structure emerges from N[ω] selection alone.
 
 - **Code**: `emergence/` folder
+- **Methodology**: "Honest substrate"—M is diagnostic only, never fed back into dynamics
 - **Result**: Hierarchy, self-reference, coherence, and autonomy all emerge from uniform initial conditions
 
-See [`emergence/README.md`](emergence/README.md) for details.
+| Level | File | Key Result |
+|-------|------|------------|
+| 1–2 | `tbu_honest.py` | 9,091× differentiation, χ = 1/(1+M) with R² = 0.995 |
+| 3 | `tbu_honest_extended.py` | Self-reference localisation (89% vs 12%) |
+| 4–5 | `tbu_honest_action.py` | Agency and sensorimotor closure |
+| 6 | `tbu_honest_boundary.py` | Sustainable action (67% consumption reduction under stress) |
+| — | `tbu_honest_multiagent.py` | Shared equilibrium across multiple patterns |
+
+See [emergence/README.md](emergence/README.md) for details.
 
 ## Quick Start
 
 ### Monte Carlo Validation
+
 ```bash
 python tbu_simulations_v3.py
 ```
 
 ### Emergence Validation
+
 ```bash
 cd emergence
-python run_emergence.py --single
+
+# Core emergence (Levels 1–2)
+python tbu_honest.py
+
+# Extended validation (Level 3)
+python tbu_honest_extended.py
+
+# Full substrate ladder
+python tbu_honest_action.py
+python tbu_honest_boundary.py
+python tbu_honest_multiagent.py
 ```
 
 ## Requirements
