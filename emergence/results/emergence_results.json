@@ -26,17 +26,19 @@
     "self_ref_pct": 60.0,
     "self_ref_high_M": 89.0,
     "self_ref_low_M": 12.0,
-    "core_coherence": 1.0
+    "core_coherence": 1.0,
+    "susceptibility_R2": 0.995
   },
   "autonomy": {
     "baseline": 0.574,
     "perturbed": 0.576,
     "final": 0.583,
-    "recovery_pct": 97.0
+    "recovery_pct": 100.0
   },
   "elapsed_seconds": 104.7,
   "metadata": {
-    "description": "Example output from run_emergence.py --single",
-    "version": "1.0"
+    "description": "Example output from tbu_honest.py (Levels 1-2)",
+    "methodology": "Honest substrate: M diagnostic only, not fed back into dynamics",
+    "version": "2.0"
   }
 }
