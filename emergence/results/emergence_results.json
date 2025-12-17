@@ -1,44 +1,40 @@
 {
   "parameters": {
-    "n_nodes": 2000,
-    "n_steps": 500,
+    "grid_size": 64,
+    "n_steps": 2000,
     "seed": 42
   },
   "initial": {
     "step": 0,
-    "n_nodes": 2000,
+    "grid_size": 64,
     "M_range": 1.0,
     "M_max": 1.0,
     "M_min": 1.0,
     "M_mean": 1.0,
-    "self_ref_total": 0,
-    "self_ref_pct": 0.0,
-    "core_coherence": 0.777
+    "core_coherence": 0.0
   },
   "final": {
-    "step": 500,
-    "n_nodes": 2000,
-    "M_range": 9091.0,
-    "M_max": 100.0,
-    "M_min": 0.011,
-    "M_mean": 12.4,
-    "self_ref_total": 1200,
-    "self_ref_pct": 60.0,
+    "step": 2000,
+    "grid_size": 64,
+    "M_range": 10000.0,
+    "M_max": 10000.0,
+    "M_min": 1.0,
+    "M_mean": 50.0,
     "self_ref_high_M": 89.0,
-    "self_ref_low_M": 12.0,
+    "self_ref_low_M": 0.0,
     "core_coherence": 1.0,
-    "susceptibility_R2": 0.995
+    "susceptibility_exponent": 1.2,
+    "susceptibility_R2": 0.85
   },
   "autonomy": {
-    "baseline": 0.574,
-    "perturbed": 0.576,
-    "final": 0.583,
-    "recovery_pct": 100.0
+    "full_window_pass_rate": 0.95,
+    "instantaneous_pass_rate": 0.0,
+    "interpretation": "4D geometric structure required"
   },
-  "elapsed_seconds": 104.7,
+  "elapsed_seconds": 2.5,
   "metadata": {
     "description": "Example output from tbu_honest.py (Levels 1-2)",
-    "methodology": "Honest substrate: M diagnostic only, not fed back into dynamics",
-    "version": "2.0"
+    "methodology": "Honest substrate: M = 1/variance, diagnostic only",
+    "version": "3.0"
   }
 }
