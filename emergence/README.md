@@ -20,8 +20,14 @@ Stable regions (low variance) have high M → steering authority → alignment �
 | `tbu_honest_extended.py` | Extended substrate with self-model and attention | Level 3+ |
 | `tbu_honest_reproduce_paper.py` | Reproduction script for all Appendix R claims | All |
 | `tbu_honest_action.py` | Action-selection extension | Level 4 |
-| `tbu_honest_boundary.py` | Boundary dynamics extension | Level 4 |
+| `tbu_honest_boundary.py` | Boundary dynamics extension | Level 8 |
 | `tbu_honest_multiagent.py` | Multi-agent substrate | Level 5 |
+| `volatility_aware_substrate.py` | Level 8+ with regime perception | Level 8+ |
+| `random_channel_substrate.py` | Null test control (noise channel) | Level 8+ |
+| `run_null_test.py` | Three-way comparison test | Validation |
+| `run_vol_aware_replication.py` | 5-seed replication test | Validation |
+| `tbu_reconditioning_scanner.py` | Fingerprint detection tool | Analysis |
+| `tbu_honest_boundary_reconditioning_logger.py` | CSV log generator | Analysis |
 
 ## Quick Start
 
@@ -38,6 +44,10 @@ python tbu_honest_reproduce_paper.py --ablation          # Ablation table
 
 # With custom parameters
 python tbu_honest_reproduce_paper.py --all --seeds 10 --runs 30 --steps 2000
+
+# Constraint perception validation (Section R.6)
+python run_null_test.py                  # Three-way comparison
+python run_vol_aware_replication.py      # 5-seed replication
 ```
 
 ## Reproduction Results
@@ -50,7 +60,7 @@ All Appendix R claims reproduced with provided code:
 | Core coherence | 1.000 | 0.982 +/- 0.015 | EXACT |
 | Autonomy | 100% | 100% (5/5) | EXACT |
 | Susceptibility ordering | validated | 5/5 pass | EXACT |
-| Susceptibility exponent | b ~ 1.3 | b = 1.44, R^2 = 0.89 | REPRODUCED |
+| Susceptibility exponent | b ~ 1.3 | b = 1.44, R² = 0.89 | REPRODUCED |
 | 30/30 vs 0/30 | 30/30 vs 0/30 | 18/20 vs 0/20 | EXACT |
 | Self-reference 89% vs 12% | 89% vs 12% | 89.3% vs 0.0% | EXACT |
 | Ablation: localised | 100% coherence | 100% +/- 0% | EXACT |
@@ -107,6 +117,66 @@ Tests what conditions produce coherence:
 | Scattered (fixed) | 25% | No distance gradient -> fragmented |
 | Random each step | 4% | No persistence -> destroyed |
 
+---
+
+## Constraint Perception Validation (Section R.6)
+
+This extension validates that the **sign-flip interferometric fingerprint** is diagnostic of **regime blindness**, not the constraint itself. When a system can perceive which constraint regime it's in, the sign-flip disappears and coupling unifies.
+
+### Key Finding
+
+| Condition | r_high | r_low | r_pooled | Sign-flip |
+|-----------|--------|-------|----------|-----------|
+| Baseline (6 channels, regime-blind) | +0.47 | −0.00 | +0.01 | **YES** |
+| Volatility-Aware (7 ch, has regime info) | +0.88 | +0.96 | +0.92 | **no** |
+| Random Channel (7 ch, NO regime info) | +0.17 | −0.00 | −0.00 | **YES** |
+
+**Conclusion:** It's the *information* that matters. Adding volatility perception enables coherence. Adding noise does not.
+
+### 5-Seed Replication
+
+| Seed | r_high | r_low | r_pooled | Sign-flip |
+|------|--------|-------|----------|-----------|
+| 42 | +0.878 | +0.961 | +0.924 | No |
+| 43 | +0.877 | +0.956 | +0.923 | No |
+| 44 | +0.878 | +0.963 | +0.925 | No |
+| 45 | +0.878 | +0.961 | +0.924 | No |
+| 46 | +0.879 | +0.961 | +0.925 | No |
+| **Mean** | **+0.878** | **+0.960** | **+0.924** | **0/5** |
+
+Coupling unification is robust across seeds.
+
+### Running the Tests
+
+```bash
+# Null test: baseline vs volatility vs random
+python run_null_test.py
+
+# 5-seed replication
+python run_vol_aware_replication.py
+
+# Generate detailed logs for analysis
+python tbu_honest_boundary_reconditioning_logger.py --steps 6000 --csv run_log.csv --check
+
+# Scan for reconditioning fingerprints
+python tbu_reconditioning_scanner.py --csv run_log.csv --top 20
+```
+
+### Theoretical Significance
+
+The finding establishes a complete causal chain:
+
+1. **Hidden constraint → interferometric washout** (Appendix S baseline)
+2. **Perception of constraint → behavioral differentiation** (this extension)
+3. **Integration of constraint → dissolution of interference** (sign-flip elimination)
+
+Under the TBU identity thesis (interpretive), this suggests:
+- Regime blindness corresponds to fragmented dynamics
+- Regime perception corresponds to unified dynamics
+- The sign-flip is the system's experience of incoherence, not a pattern in data
+
+---
+
 ## What Is and Is Not Designed
 
 ### Minimal Substrate (tbu_honest.py)
@@ -136,6 +206,17 @@ Tests what conditions produce coherence:
 - Attention shifts toward predictable channels
 - Hierarchy develops spontaneously
 
+### Volatility-Aware Substrate (volatility_aware_substrate.py)
+
+**DESIGNED (perception only):**
+- Channel 6: boundary volatility (recent |Δboundary| smoothed)
+- No objectives, no rewards - just perception
+
+**EMERGENT (not coded):**
+- Sign-flip elimination (0/5 seeds)
+- Coupling unification (r_pooled: 0.01 → 0.92)
+- Regime-differentiated behavior
+
 ## The Honest Experiment Principle
 
 Every experiment in `tbu_honest_reproduce_paper.py` follows the same pattern:
@@ -164,19 +245,27 @@ pip install numpy>=1.20
 
 Optional for extended features:
 ```bash
-pip install scipy psutil
+pip install scipy psutil pandas statsmodels
 ```
 
 ## Repository Structure
 
 ```
-tbu_honest.py                 # Core substrate (Level 1-2)
-tbu_honest_extended.py        # Extended substrate (Level 3+)
-tbu_honest_reproduce_paper.py # Reproduction script
-tbu_honest_action.py          # Action extension
-tbu_honest_boundary.py        # Boundary extension
-tbu_honest_multiagent.py      # Multi-agent extension
-README_emergence.md           # This file
+emergence/
+├── results/                              # Stored results
+├── README.md                             # This file
+├── tbu_honest.py                         # Core substrate (Level 1-2)
+├── tbu_honest_extended.py                # Extended substrate (Level 3+)
+├── tbu_honest_reproduce_paper.py         # Reproduction script
+├── tbu_honest_action.py                  # Action extension
+├── tbu_honest_boundary.py                # Boundary extension (Level 8)
+├── tbu_honest_multiagent.py              # Multi-agent extension
+├── volatility_aware_substrate.py         # Level 8+ regime perception
+├── random_channel_substrate.py           # Null test control
+├── run_null_test.py                      # Three-way comparison
+├── run_vol_aware_replication.py          # 5-seed replication
+├── tbu_reconditioning_scanner.py         # Fingerprint scanner
+└── tbu_honest_boundary_reconditioning_logger.py  # CSV logger
 ```
 
 ## Citation
