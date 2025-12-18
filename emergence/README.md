@@ -14,20 +14,42 @@ Stable regions (low variance) have high M → steering authority → alignment �
 
 ## Files
 
+### Core Substrates
+
 | File | Purpose | Level |
 |------|---------|-------|
 | `tbu_honest.py` | Core substrate - minimal physics for emergence | Level 1-2 |
 | `tbu_honest_extended.py` | Extended substrate with self-model and attention | Level 3+ |
-| `tbu_honest_reproduce_paper.py` | Reproduction script for all Appendix R claims | All |
 | `tbu_honest_action.py` | Action-selection extension | Level 4 |
 | `tbu_honest_boundary.py` | Boundary dynamics extension | Level 8 |
 | `tbu_honest_multiagent.py` | Multi-agent substrate | Level 5 |
-| `volatility_aware_substrate.py` | Level 8+ with regime perception | Level 8+ |
-| `random_channel_substrate.py` | Null test control (noise channel) | Level 8+ |
-| `run_null_test.py` | Three-way comparison test | Validation |
-| `run_vol_aware_replication.py` | 5-seed replication test | Validation |
-| `tbu_reconditioning_scanner.py` | Fingerprint detection tool | Analysis |
-| `tbu_honest_boundary_reconditioning_logger.py` | CSV log generator | Analysis |
+
+### Constraint Perception (Section R.6)
+
+| File | Purpose |
+|------|---------|
+| `volatility_aware_substrate.py` | Level 8+ with regime perception |
+| `random_channel_substrate.py` | Null test control (noise channel) |
+| `run_null_test.py` | Three-way comparison test |
+| `run_vol_aware_replication.py` | 5-seed replication test |
+
+### Mesh Mapping (Appendix T)
+
+| File | Purpose |
+|------|---------|
+| `test_primary_classification.py` | Experiment 1: Primary variable classification |
+| `test_secondary_classification.py` | Experiment 2: Secondary variable classification |
+| `test_multi_perception.py` | Experiment 3: Hierarchy principle (super-additive) |
+| `map_constraint_mesh.py` | Full mesh topology scan |
+| `mesh_connectivity.py` | Graph connectivity analysis |
+
+### Analysis Tools
+
+| File | Purpose |
+|------|---------|
+| `tbu_honest_reproduce_paper.py` | Reproduction script for all Appendix R claims |
+| `tbu_reconditioning_scanner.py` | Fingerprint detection tool |
+| `tbu_honest_boundary_reconditioning_logger.py` | CSV log generator |
 
 ## Quick Start
 
@@ -48,6 +70,13 @@ python tbu_honest_reproduce_paper.py --all --seeds 10 --runs 30 --steps 2000
 # Constraint perception validation (Section R.6)
 python run_null_test.py                  # Three-way comparison
 python run_vol_aware_replication.py      # 5-seed replication
+
+# Mesh mapping (Appendix T)
+python test_primary_classification.py    # Experiment 1
+python test_secondary_classification.py  # Experiment 2
+python test_multi_perception.py          # Experiment 3 (hierarchy)
+python map_constraint_mesh.py            # Full topology scan
+python mesh_connectivity.py              # Graph analysis
 ```
 
 ## Reproduction Results
@@ -146,34 +175,88 @@ This extension validates that the **sign-flip interferometric fingerprint** is d
 
 Coupling unification is robust across seeds.
 
-### Running the Tests
+---
 
-```bash
-# Null test: baseline vs volatility vs random
-python run_null_test.py
+## Measurement Under Regime Multiplicity (Appendix T)
 
-# 5-seed replication
-python run_vol_aware_replication.py
+This extension maps the constraint mesh topology and establishes the **hierarchy principle**: not all perception is beneficial. Primary (regime-defining) variables must be perceived before secondary (content) variables become useful.
 
-# Generate detailed logs for analysis
-python tbu_honest_boundary_reconditioning_logger.py --steps 6000 --csv run_log.csv --check
+### Methodology (Honest)
 
-# Scan for reconditioning fingerprints
-python tbu_reconditioning_scanner.py --csv run_log.csv --top 20
+All experiments follow the same honest pattern:
+- Extend Level 8 substrate with extra perception channel(s)
+- Channels carry information computed FROM the substrate's own state
+- **NO objectives, rewards, or conditional logic added**
+- Observe whether coupling structure changes
+
+**This is opening windows, not pushing buttons.**
+
+### Variable Classification
+
+| Tier | Variable | Δ from Baseline | Effect Alone |
+|------|----------|-----------------|--------------|
+| **DOMINANT PRIMARY** | boundary_volatility | +0.918 | Near-complete coherence |
+| Weak Primary | action_stability | +0.119 | Modest improvement |
+| Weak Primary | core_coherence | +0.112 | Modest improvement |
+| Marginal Primary | M_ratio | +0.070 | Minimal improvement |
+| Secondary (neutral) | obs_sigma | -0.008 | No effect |
+| Secondary (harmful) | env_resources | -0.246 | **Degrades coherence** |
+| Secondary (harmful) | env_health | -0.249 | **Degrades coherence** |
+
+### The Hierarchy Principle
+
+| Configuration | Pooled r | Δ | Interpretation |
+|---------------|----------|---|----------------|
+| Baseline (6ch) | +0.009 | — | Regime-blind |
+| Volatility only (7ch) | +0.924 | +0.915 | Primary works alone |
+| Env_health only (7ch) | -0.246 | -0.255 | **Harmful alone** |
+| Both (8ch) | +0.935 | +0.926 | Super-additive |
+
+**Critical finding:** Perceiving a secondary axis without the primary one is **worse than blindness**.
+
+### Compounding Analysis
+
+```
+Volatility improvement:    +0.915
+Env_health improvement:    -0.255  ← HARMFUL alone
+Expected if additive:      +0.660
+Actual (both):             +0.926
+
+→ SUPER-ADDITIVE: Combined effect exceeds sum by +0.266
 ```
 
-### Theoretical Significance
+### Mesh Topology
 
-The finding establishes a complete causal chain:
+| Metric | Value |
+|--------|-------|
+| Observable variables (nodes) | 14 |
+| Unique pairs with hidden structure (edges) | 69 |
+| Sign-flip instances | 129 (20.7%) |
+| High washout instances (>50%) | 229 (36.7%) |
+| Connected components | 1 (fully connected) |
+| Diameter | 2 |
+| Strength decay per hop | 3-6× |
 
-1. **Hidden constraint → interferometric washout** (Appendix S baseline)
-2. **Perception of constraint → behavioral differentiation** (this extension)
-3. **Integration of constraint → dissolution of interference** (sign-flip elimination)
+**Key finding:** Topological distance ≠ informational access. The mesh is topologically small but functionally local.
 
-Under the TBU identity thesis (interpretive), this suggests:
-- Regime blindness corresponds to fragmented dynamics
-- Regime perception corresponds to unified dynamics
-- The sign-flip is the system's experience of incoherence, not a pattern in data
+### Running the Mesh Mapping Tests
+
+```bash
+# Experiment 1: Primary classification
+python test_primary_classification.py
+
+# Experiment 2: Secondary classification  
+python test_secondary_classification.py
+
+# Experiment 3: Hierarchy principle (super-additive)
+python test_multi_perception.py
+
+# Full mesh scan
+python map_constraint_mesh.py
+
+# Connectivity analysis
+python mesh_connectivity.py
+```
 
 ---
 
@@ -206,20 +289,22 @@ Under the TBU identity thesis (interpretive), this suggests:
 - Attention shifts toward predictable channels
 - Hierarchy develops spontaneously
 
-### Volatility-Aware Substrate (volatility_aware_substrate.py)
+### Perception Extensions (volatility_aware_substrate.py, test_*.py)
 
 **DESIGNED (perception only):**
-- Channel 6: boundary volatility (recent |Δboundary| smoothed)
+- Extra channel(s) carrying state-derived information
 - No objectives, no rewards - just perception
 
 **EMERGENT (not coded):**
 - Sign-flip elimination (0/5 seeds)
 - Coupling unification (r_pooled: 0.01 → 0.92)
 - Regime-differentiated behavior
+- Hierarchy principle (super-additive compounding)
+- Secondary variables harmful without primary context
 
 ## The Honest Experiment Principle
 
-Every experiment in `tbu_honest_reproduce_paper.py` follows the same pattern:
+Every experiment follows the same pattern:
 
 ```python
 # 1. Create substrate with minimal physics
@@ -233,9 +318,7 @@ for _ in range(n_steps):
 results = sub.measure_X()
 ```
 
-**Contrast with detection experiments:** The main `reproduce_paper.py` (for LIGO/interferometry) *does* inject synthetic signals to test detection sensitivity. That's a different kind of validation.
-
-Appendix R is about proving **emergence claims** are real. Everything you see comes purely from running `step_physics()` and observing what develops.
+**Key distinction:** We open perception channels (windows), we don't push buttons. The system decides what to do with the information.
 
 ## Requirements
 
@@ -254,16 +337,29 @@ pip install scipy psutil pandas statsmodels
 emergence/
 ├── results/                              # Stored results
 ├── README.md                             # This file
-├── tbu_honest.py                         # Core substrate (Level 1-2)
-├── tbu_honest_extended.py                # Extended substrate (Level 3+)
-├── tbu_honest_reproduce_paper.py         # Reproduction script
-├── tbu_honest_action.py                  # Action extension
-├── tbu_honest_boundary.py                # Boundary extension (Level 8)
-├── tbu_honest_multiagent.py              # Multi-agent extension
+│
+├── # Core Substrates
+├── tbu_honest.py                         # Level 1-2
+├── tbu_honest_extended.py                # Level 3+
+├── tbu_honest_action.py                  # Level 4
+├── tbu_honest_boundary.py                # Level 8
+├── tbu_honest_multiagent.py              # Level 5
+│
+├── # Constraint Perception (Section R.6)
 ├── volatility_aware_substrate.py         # Level 8+ regime perception
 ├── random_channel_substrate.py           # Null test control
 ├── run_null_test.py                      # Three-way comparison
 ├── run_vol_aware_replication.py          # 5-seed replication
+│
+├── # Mesh Mapping (Appendix T)
+├── test_primary_classification.py        # Experiment 1
+├── test_secondary_classification.py      # Experiment 2
+├── test_multi_perception.py              # Experiment 3 (hierarchy)
+├── map_constraint_mesh.py                # Topology scan
+├── mesh_connectivity.py                  # Graph analysis
+│
+├── # Analysis Tools
+├── tbu_honest_reproduce_paper.py         # Full reproduction
 ├── tbu_reconditioning_scanner.py         # Fingerprint scanner
 └── tbu_honest_boundary_reconditioning_logger.py  # CSV logger
 ```
@@ -287,4 +383,4 @@ MIT License
 
 Gavin Artz - gavinartz@gmail.com
 
-Repository: https://github.com/gavart/tbu-simulation
+Repository: https://github.com/DBU-AUS/tbu-simulation
