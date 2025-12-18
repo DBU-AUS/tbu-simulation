@@ -18,24 +18,37 @@ tbu-simulation/
 │   ├── TBU_MC_10000_runs_null.csv
 │   ├── TBU_MC_10000_runs_signal.csv
 │   └── ...
-└── emergence/                   # Emergence validation (Appendix R)
+└── emergence/                   # Emergence validation (Appendices R & T)
     ├── README.md
-    ├── tbu_honest.py            # Honest substrate (Levels 1–2)
-    ├── tbu_honest_extended.py   # Extended substrate (Level 3)
-    ├── tbu_honest_action.py     # Action substrate (Levels 4–5)
-    ├── tbu_honest_boundary.py   # Complete boundary (Level 8)
-    ├── tbu_honest_multiagent.py # Multi-pattern validation
-    ├── tbu_honest_reproduce_paper.py  # Reproduction script
-    ├── volatility_aware_substrate.py  # Constraint perception (Section R.6)
-    ├── random_channel_substrate.py    # Null test control
-    ├── run_null_test.py               # Three-way comparison
-    ├── run_vol_aware_replication.py   # 5-seed replication
-    ├── tbu_reconditioning_scanner.py  # Fingerprint scanner
+    │
+    ├── # Core Substrates
+    ├── tbu_honest.py                 # Honest substrate (Levels 1–2)
+    ├── tbu_honest_extended.py        # Extended substrate (Level 3)
+    ├── tbu_honest_action.py          # Action substrate (Levels 4–5)
+    ├── tbu_honest_boundary.py        # Complete boundary (Level 8)
+    ├── tbu_honest_multiagent.py      # Multi-pattern validation
+    │
+    ├── # Constraint Perception (Section R.6)
+    ├── volatility_aware_substrate.py # Level 8+ with regime perception
+    ├── random_channel_substrate.py   # Null test control
+    ├── run_null_test.py              # Three-way comparison
+    ├── run_vol_aware_replication.py  # 5-seed replication
+    │
+    ├── # Mesh Mapping (Appendix T)
+    ├── test_primary_classification.py    # Experiment 1: Primary variables
+    ├── test_secondary_classification.py  # Experiment 2: Secondary variables
+    ├── test_multi_perception.py          # Experiment 3: Hierarchy principle
+    ├── map_constraint_mesh.py            # Full topology scan
+    ├── mesh_connectivity.py              # Graph analysis
+    │
+    ├── # Analysis Tools
+    ├── tbu_honest_reproduce_paper.py     # Reproduction script
+    ├── tbu_reconditioning_scanner.py     # Fingerprint scanner
     ├── tbu_honest_boundary_reconditioning_logger.py  # CSV logger
     └── results/
 ```
 
-## Two Validation Components
+## Three Validation Components
 
 ### 1. Monte Carlo Experimental Validation (Appendix D)
 
@@ -58,13 +71,15 @@ Tests whether observer-like structure emerges from N[ω] selection alone.
 | 1–2 | `tbu_honest.py` | 9,091× differentiation, χ = 1/(1+M) with R² = 0.995 |
 | 3 | `tbu_honest_extended.py` | Self-reference localisation (89% vs 12%) |
 | 4–5 | `tbu_honest_action.py` | Agency and sensorimotor closure |
-| 8 | `tbu_honest_boundary.py` | Sustainable action (67% consumption reduction under stress) |
-| 8+ | `volatility_aware_substrate.py` | Constraint perception eliminates sign-flip (Section R.6) |
+| 8 | `tbu_honest_boundary.py` | Sustainable action (67% consumption reduction) |
+| 8+ | `volatility_aware_substrate.py` | Constraint perception eliminates sign-flip |
 | — | `tbu_honest_multiagent.py` | Shared equilibrium across multiple patterns |
 
-### 3. Constraint Perception Validation (Section R.6)
+### 3. Constraint Perception & Mesh Mapping (Section R.6, Appendix T)
 
-Tests whether the sign-flip interferometric fingerprint is diagnostic of regime blindness.
+Tests the structure of the constraint mesh and establishes the hierarchy principle.
+
+**Section R.6 - Perception eliminates sign-flip:**
 
 | Condition | r_pooled | Sign-flip | Interpretation |
 |-----------|----------|-----------|----------------|
@@ -72,7 +87,15 @@ Tests whether the sign-flip interferometric fingerprint is diagnostic of regime 
 | Volatility-Aware (7 ch, has info) | +0.92 | no | Perception → unified coupling |
 | Random Channel (7 ch, NO info) | −0.00 | YES | Noise doesn't help |
 
-**Key finding:** It's the *information* that matters. Opening a perceptual channel for a constraint variable eliminates the interferometric signature. Adding noise does not.
+**Appendix T - Hierarchy principle:**
+
+| Configuration | Δ from Baseline | Classification |
+|---------------|-----------------|----------------|
+| boundary_volatility | +0.918 | DOMINANT PRIMARY |
+| env_health alone | −0.249 | HARMFUL (secondary without context) |
+| Both together | +0.926 | Super-additive |
+
+**Key finding:** Primary (regime-defining) variables must be perceived before secondary variables become beneficial. Perceiving secondary variables without primary context actively degrades coherence.
 
 See [emergence/README.md](emergence/README.md) for details.
 
@@ -116,6 +139,23 @@ python run_null_test.py
 python run_vol_aware_replication.py
 ```
 
+### Mesh Mapping (Appendix T)
+
+```bash
+cd emergence
+
+# Variable classification
+python test_primary_classification.py
+python test_secondary_classification.py
+
+# Hierarchy principle (super-additive compounding)
+python test_multi_perception.py
+
+# Full mesh topology
+python map_constraint_mesh.py
+python mesh_connectivity.py
+```
+
 ## Requirements
 
 ```
@@ -124,7 +164,7 @@ scipy>=1.7
 matplotlib>=3.4
 ```
 
-Optional for constraint perception analysis:
+Optional for extended analysis:
 ```
 pandas
 statsmodels
