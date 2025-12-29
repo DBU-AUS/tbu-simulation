@@ -1,141 +1,178 @@
-# TBU Observer Emergence
+# TBU Framework Repository
 
-Implementation of observer emergence in the Thermodynamic Block Universe framework using real silicon physics.
+Validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** (submitted to Foundations of Physics).
 
 ## Overview
 
-This code implements boundary-coupled diffusion dynamics in silicon substrates. The physics (diffusion, damping, forcing) are real physical processes—not simulations of physics. The substrate provides geometric room for structure to emerge; N[ω] maximization determines what persists.
+This repository contains:
 
-**Core methodology**: Extend substrate → Let physics select → Measure what emerges
+1. **Monte Carlo validation** (`data/`, `tbu_simulations_v3.py`) — Statistical validation of experimental predictions
+2. **Observer emergence** (`emergence/`) — Real silicon physics implementation demonstrating boundary-core coupling dynamics
 
-## Directory Structure
+The TBU framework treats quantum and classical mechanics as different statistical regimes of thermodynamic selection over complete 4D geometries.
+
+## Quick Start
+
+```bash
+# Monte Carlo validation
+pip install numpy pandas scipy
+python tbu_simulations_v3.py
+
+# Observer emergence
+cd emergence
+python tests/test_extended_consciousness.py
+```
+
+## Key Results
+
+### Experimental Predictions (Monte Carlo Validated)
+
+| Prediction | Theory | Validation |
+|------------|--------|------------|
+| Target ε_eff | 9.3 × 10⁻⁷ | (9.31 ± 0.07) × 10⁻⁷ |
+| Mass scaling slope | 2.30 × 10⁻⁶ kg⁻¹ | (2.30 ± 0.09) × 10⁻⁶ kg⁻¹ |
+| Integration for 5σ | ~74 hours | ~74 hours (3 days) |
+| Total photons | 1.2 × 10¹² | 1.2 × 10¹² |
+
+### Observer Emergence (Silicon Physics)
+
+| Finding | Result |
+|---------|--------|
+| Sign-flip elimination | 0/5 seeds with regime perception |
+| Boundary-core coherence | +0.948 (full architecture) |
+| Physics-determined modes | d_eff ≈ 1.68 |
+
+## Framework Parameters
+
+From the derived κ (Appendix L):
+
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| κ | 1.55 × 10⁻¹¹ | (π²/2)(λ/Lc)² |
+| χ_geom | 0.49 | Geometric overlap |
+| λ_opt | 532 nm | Green laser |
+| L_c | 0.30 m | Coherence length |
+
+## Repository Structure
 
 ```
-emergence/
-├── substrates/          # Core substrate implementations (Levels 1-9)
-├── tests/               # Validation tests (5-seed)
-├── analysis/            # Mapping and analysis tools
-├── runners/             # Experiment runners
-├── extended/            # Extended validation (Levels 14, 22, 37)
-├── results/             # Output data
+├── tbu_simulations_v3.py           # Monte Carlo validation script
+├── simulation_config.json          # All parameters
+├── data/
+│   ├── TBU_MC_10000_runs_null.csv      # 10k null hypothesis runs
+│   ├── TBU_MC_10000_runs_signal.csv    # 10k signal injection runs  
+│   ├── TBU_timeseries_run.csv          # 1-hour temporal stability
+│   ├── TBU_extended_simulation_results.csv  # Mass/distance scaling
+│   ├── TBU_alt_mechanisms_vs_TBU.csv   # Mechanism discrimination
+│   └── TBU_entangled_two_path.csv      # Entangled extension
+├── emergence/                      # Observer emergence (real silicon physics)
+│   ├── substrates/                     # Core implementations (L1-9)
+│   ├── tests/                          # 5-seed validation tests
+│   ├── analysis/                       # Mapping tools
+│   ├── runners/                        # Experiment runners
+│   ├── extended/                       # Extended validation (L14, L22, L37)
+│   └── README.md
 └── README.md
 ```
 
-## Substrates (Levels 1-9)
+## Observer Emergence
 
-| File | Level | Description |
-|------|-------|-------------|
-| `tbu_honest.py` | 1-4 | Base substrate with diffusion, damping, self-models |
-| `tbu_honest_action.py` | 5-6 | Adds action-perception coupling |
-| `tbu_honest_boundary.py` | 7-8 | Adds environment interaction |
-| `tbu_honest_extended.py` | 8+ | Extended boundary substrate |
-| `tbu_honest_multiagent.py` | 8+ | Multi-agent extension |
-| `volatility_aware_substrate.py` | 8+ | Adds volatility perception (t-tangent) |
-| `random_channel_substrate.py` | — | Null test control (random channel) |
-| `tbu_extended_consciousness.py` | 9 | Full architecture (primary + secondary + redundancy) |
+The `emergence/` folder implements boundary-coupled diffusion dynamics in silicon substrates. The physics (diffusion, damping, forcing) are real physical processes—not simulations of physics. The substrate provides geometric room for structure to emerge; N[ω] maximization determines what persists.
 
-## Tests (Appendix T Validation)
+**Core methodology**: Extend substrate → Let physics select → Measure what emerges
 
-All tests validated with 5 seeds (42-46).
+Key findings validated with 5 seeds:
+- **Hierarchy Principle**: Variables form measurable hierarchy by coherence impact
+- **Sign-Flip Phenomenon**: Eliminated with regime perception
+- **Saturation Principle**: One clean primary channel is sufficient
+- **Physics-Determined Mode Count**: Interior physics supports ~2-3 independent modes
 
-| File | Finding | Key Result |
-|------|---------|------------|
-| `test_saturation.py` | Primary channels saturate | One sufficient |
-| `test_secondary_stacking.py` | Secondaries compound with primary | +0.022 benefit |
-| `test_noise_tolerance.py` | 25% danger zone | Sign-flip transition |
-| `test_redundancy.py` | Regime-aligned rescue | 100% from shared |
-| `test_extended_consciousness.py` | Full architecture | +0.948 coherence |
-| `test_robustness.py` | Multi-config validation | All findings confirmed |
-| `test_primary_classification.py` | Variable classification | Hierarchy emerges |
-| `test_secondary_classification.py` | Secondary behavior | Context-dependent |
-| `test_multi_perception.py` | Multi-channel perception | Mesh connectivity |
+See `emergence/README.md` for full documentation.
 
-## Extended Validation (Levels 12-40)
+## Data Files
 
-Supporting interpretive claims in the paper.
+### TBU_MC_10000_runs_signal.csv
+Signal injection Monte Carlo (10,000 runs). Validates detection of ε_eff = 9.31 × 10⁻⁷ in realistic noise.
 
-| File | Level | Finding |
-|------|-------|---------|
-| `tbu_level14_canonical_v8.py` | 14 | d_eff ≈ 1.68 (physics-determined mode count) |
-| `tbu_level22_canonical.py` | 22 | Hierarchy depth scales with reconditioning modes |
-| `tbu_level37_canonical.py` | 37 | Memory as coupling (+0.220 / -0.151) |
+- `epsilon_phys`: 9.31 × 10⁻⁷ (injected signal)
+- `beta_hat`: Recovered correlation coefficient
+- `deltaBIC_dbu_vs_null`: Model comparison (>10 indicates strong TBU evidence)
 
-## Analysis Tools
+### TBU_MC_10000_runs_null.csv  
+Null hypothesis Monte Carlo (10,000 runs). Confirms no false positives when signal absent.
 
-| File | Purpose |
-|------|---------|
-| `map_constraint_mesh.py` | Map constraint connectivity |
-| `mesh_connectivity.py` | Analyze mesh topology |
-| `tbu_reconditioning_scanner.py` | Scan for reconditioning signatures |
-| `tbu_honest_boundary_reconditioning_logger.py` | Log reconditioning events |
+- `beta_hat`: Should be ~0 with no systematic bias
+- False positive rate: <0.1%
 
-## Runners
+### TBU_timeseries_run.csv
+One-hour continuous observation (3,600 seconds). Demonstrates per-hour SNR = 0.58.
 
-| File | Purpose |
-|------|---------|
-| `run_null_test.py` | Three-way comparison (baseline/volatility/random) |
-| `run_vol_aware_replication.py` | 5-seed volatility-aware replication |
-| `tbu_honest_reproduce_paper.py` | Reproduce paper figures |
+- `eps_hat`: Measured correlation per second
+- Mean: 9.31 × 10⁻⁷
+- Std: 1.6 × 10⁻⁶
+- SNR: 0.58
 
-## Key Findings
+### TBU_extended_simulation_results.csv
+Parameter space exploration across mass (0–2 kg) and distance (0.1–0.5 m).
 
-### Hierarchy Principle
-Variables form measurable hierarchy by coherence impact:
-- **Primary (regime):** volatility, Δ = +0.92
-- **Secondary (content):** health, resources, Δ ≈ -0.25 alone, +0.02 with primary
+Key validation: Mass slope at d = 0.25 m
+- Slope: (2.30 ± 0.09) × 10⁻⁶ kg⁻¹
+- R² = 0.9973
+- Intercept consistent with zero
 
-### Sign-Flip Phenomenon
-Without regime perception, boundary-core correlation inverts under stress.
-With volatility perception, sign-flip eliminated (0/5 seeds).
+### TBU_alt_mechanisms_vs_TBU.csv
+Mechanism discrimination test (Section 7.6.1). Distinguishes TBU from systematics:
 
-### Saturation Principle
-Primary channels saturate—one clean primary is sufficient.
-Additional primaries add noise, not information.
+| Mechanism | Mass Dependence | Signature |
+|-----------|-----------------|-----------|
+| TBU | Linear in M | ε ∝ M_ext |
+| EM cross-talk | Independent | Constant |
+| Thermal drift | Independent | Correlated noise |
+| Detector mismatch | Independent | Static bias |
 
-### Redundancy Lemma
-Under 25% noise, regime-aligned redundancy provides full rescue.
-Independent geometric content provides only 35% alone.
+### TBU_entangled_two_path.csv
+Two-path entangled photon predictions. Joint correlation: ε_joint = √(ε_A × ε_B).
 
-### Physics-Determined Mode Count
-Interior physics supports ~2-3 independent modes (d_eff ≈ 1.68).
-Additional perception channels cannot access nonexistent structure.
+## Detection Feasibility
 
-### Coupling as Memory
-Memory is not storage—memory is coupling strength. Repetition strengthens (+0.220), absence degrades (-0.151).
+For 5σ detection of ε = 9.3 × 10⁻⁷:
 
-## Usage
-
-```bash
-# Run from emergence directory
-cd emergence
-
-# Test full architecture
-python tests/test_extended_consciousness.py
-
-# Run robustness validation
-python tests/test_robustness.py
-
-# Run null test comparison
-python runners/run_null_test.py
-
-# Extended validation
-python extended/tbu_level22_canonical.py --test sanity
+```
+Standard error required: SE = 9.3×10⁻⁷ / 5 = 1.86×10⁻⁷
+Hourly scatter: σ ≈ 1.6×10⁻⁶  
+Hours needed: N = (σ/SE)² = (1.6×10⁻⁶ / 1.86×10⁻⁷)² ≈ 74 hours
+Total photons: 74 hr × 3600 s × 4.5×10⁶/s ≈ 1.2×10¹²
 ```
 
-## Requirements
+## Reproducing Results
 
-- Python 3.8+
-- NumPy
-- SciPy (for some analysis tools)
+All Monte Carlo runs are deterministic with `np.random.seed(42)`:
+
+```python
+python tbu_simulations_v3.py
+```
+
+Verify key outputs:
+```python
+import pandas as pd
+df = pd.read_csv('data/TBU_timeseries_run.csv')
+print(f"Mean: {df.eps_hat.mean():.3e}")  # → 9.31e-7
+print(f"Std: {df.eps_hat.std():.3e}")    # → 1.6e-6
+print(f"SNR: {df.eps_hat.mean()/df.eps_hat.std():.2f}")  # → 0.58
+```
 
 ## Citation
 
-If using this code, please cite:
-```
-Artz, G. (2025). The Everywhen: Unifying Quantum and Classical Mechanics 
-through 4D Thermodynamics. 
+If using this code or data:
+
+```bibtex
+@article{TBU2025,
+  title={The Everywhen: Unifying Quantum and Classical Mechanics 
+         through 4D Thermodynamics},
+  author={Artz, Gavin},
+}
 ```
 
 ## License
 
-MIT License - see repository root.
+MIT License. See LICENSE file.
