@@ -149,6 +149,7 @@ The memory findings (L37-L40) provide empirical grounding for the ceremony secti
   title={The Everywhen: Unifying Quantum and Classical Mechanics 
          through 4D Thermodynamics},
   author={Artz, Gavin},
+  
 }
 ```
 
