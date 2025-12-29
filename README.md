@@ -42,6 +42,13 @@ python tests/test_extended_consciousness.py
 | Boundary-core coherence | +0.948 (full architecture) |
 | Physics-determined modes | d_eff ≈ 1.68 |
 
+### 3D Slice as Perception-Action Layer (L31b-L32)
+
+| Level | Finding | Key Metric |
+|-------|---------|------------|
+| L31b | Self-reference enables geometry selection | +0.02 coherence (5/5 seeds) |
+| L32 | Advantage from perception-action capacity | 2% reduction in ablation |
+
 ### Memory as Coupling (L37-L40)
 
 | Level | Finding | Key Metric |
@@ -79,10 +86,12 @@ From the derived κ (Appendix L):
 │   ├── tests/                          # 5-seed validation tests
 │   ├── analysis/                       # Mapping tools
 │   ├── runners/                        # Experiment runners
-│   ├── extended/                       # Extended validation (L14, L22, L37-L40)
+│   ├── extended/                       # Extended validation (L14, L22, L31b-L32, L37-L40)
 │   │   ├── multi_physics_loader.py         # Real physics data loader
 │   │   ├── tbu_level14_canonical_v8.py     # Physics-determined mode count
 │   │   ├── tbu_level22_canonical.py        # Hierarchy depth scaling
+│   │   ├── tbu_level31b_canonical.py       # Self-reference geometry selection
+│   │   ├── tbu_level32_canonical.py        # Perception-action capacity
 │   │   ├── tbu_level37_canonical.py        # Memory as coupling
 │   │   ├── tbu_level38_canonical.py        # Template persistence
 │   │   ├── tbu_level39_canonical.py        # Pattern identity vs activity
@@ -102,6 +111,7 @@ Key findings validated with 5 seeds:
 - **Sign-Flip Phenomenon**: Eliminated with regime perception
 - **Saturation Principle**: One clean primary channel is sufficient
 - **Physics-Determined Mode Count**: Interior physics supports ~2-3 independent modes
+- **3D Slice Uniqueness**: Only layer that can perceive AND act (L31b-L32)
 - **Memory as Coupling**: Long-term memory access behaves as re-entry, not retrieval
 
 See `emergence/README.md` for full documentation.
@@ -193,6 +203,7 @@ If using this code or data:
 ## License
 
 MIT License. See LICENSE file.
+
 ## Contact
 
 - Email: gavinartz@gmail.com
