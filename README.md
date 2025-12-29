@@ -1,6 +1,6 @@
 # TBU Framework Repository
 
-Validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** (submitted to Foundations of Physics).
+Validation suite for **"Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"** (submitted to Foundations of Physics).
 
 ## Overview
 
@@ -194,8 +194,7 @@ If using this code or data:
 
 ```bibtex
 @article{TBU2025,
-  title={The Everywhen: Unifying Quantum and Classical Mechanics 
-         through 4D Thermodynamics},
+  title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
   author={Artz, Gavin},
 }
 ```
