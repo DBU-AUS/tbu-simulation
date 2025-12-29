@@ -1,6 +1,6 @@
 # TBU Emergence Validation
 
-Computational validation of observer structure emergence from N[ω] selection, as described in Appendix R of "The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics."
+Computational validation of observer structure emergence from N[ω] selection, as described in Appendix R of "Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"
 
 ## Overview
 
@@ -146,8 +146,7 @@ The memory findings (L37-L40) provide empirical grounding for the ceremony secti
 
 ```bibtex
 @article{artz2025tbu,
-  title={The Everywhen: Unifying Quantum and Classical Mechanics 
-         through 4D Thermodynamics},
+  title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
   author={Artz, Gavin},
   
 }
