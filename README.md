@@ -1,189 +1,198 @@
-# TBU Simulation
+# TBU Framework Repository
 
-Simulation code and datasets for:
-> **"Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"**
-> 
-> Gavin Artz (2025)
+Validation suite for **"The Everywhen: Unifying Quantum and Classical Mechanics through 4D Thermodynamics"** (submitted to Foundations of Physics).
+
+## Overview
+
+This repository contains:
+
+1. **Monte Carlo validation** (`data/`, `tbu_simulations_v3.py`) — Statistical validation of experimental predictions
+2. **Observer emergence** (`emergence/`) — Real silicon physics implementation demonstrating boundary-core coupling dynamics
+
+The TBU framework treats quantum and classical mechanics as different statistical regimes of thermodynamic selection over complete 4D geometries.
+
+## Quick Start
+
+```bash
+# Monte Carlo validation
+pip install numpy pandas scipy
+python tbu_simulations_v3.py
+
+# Observer emergence
+cd emergence
+python tests/test_extended_consciousness.py
+```
+
+## Key Results
+
+### Experimental Predictions (Monte Carlo Validated)
+
+| Prediction | Theory | Validation |
+|------------|--------|------------|
+| Target ε_eff | 9.3 × 10⁻⁷ | (9.31 ± 0.07) × 10⁻⁷ |
+| Mass scaling slope | 2.30 × 10⁻⁶ kg⁻¹ | (2.30 ± 0.09) × 10⁻⁶ kg⁻¹ |
+| Integration for 5σ | ~74 hours | ~74 hours (3 days) |
+| Total photons | 1.2 × 10¹² | 1.2 × 10¹² |
+
+### Observer Emergence (Silicon Physics)
+
+| Finding | Result |
+|---------|--------|
+| Sign-flip elimination | 0/5 seeds with regime perception |
+| Boundary-core coherence | +0.948 (full architecture) |
+| Physics-determined modes | d_eff ≈ 1.68 |
+
+### Memory as Coupling (L37-L40)
+
+| Level | Finding | Key Metric |
+|-------|---------|------------|
+| L37 | Repetition strengthens coupling | +0.220 vs -0.151 |
+| L38 | Template persists after forcing stops | ~88% similarity |
+| L39 | Pattern identity degrades while template remains | 3% vs 88% |
+| L40 | Templates give predictive edge | 12.2% lower error |
+
+## Framework Parameters
+
+From the derived κ (Appendix L):
+
+| Parameter | Value | Source |
+|-----------|-------|--------|
+| κ | 1.55 × 10⁻¹¹ | (π²/2)(λ/Lc)² |
+| χ_geom | 0.49 | Geometric overlap |
+| λ_opt | 532 nm | Green laser |
+| L_c | 0.30 m | Coherence length |
 
 ## Repository Structure
 
 ```
-tbu-simulation/
-├── README.md                    # This file
-├── LICENSE                      # MIT License
-├── CHANGELOG.md
-├── simulation_config.json
-├── tbu_simulations_v3.py        # Monte Carlo validation (Appendix D)
-├── data/                        # Simulation datasets
-│   ├── TBU_MC_10000_runs_null.csv
-│   ├── TBU_MC_10000_runs_signal.csv
-│   └── ...
-└── emergence/                   # Emergence validation (Appendices R & T)
-    ├── README.md
-    │
-    ├── # Core Substrates
-    ├── tbu_honest.py                 # Honest substrate (Levels 1–2)
-    ├── tbu_honest_extended.py        # Extended substrate (Level 3)
-    ├── tbu_honest_action.py          # Action substrate (Levels 4–5)
-    ├── tbu_honest_boundary.py        # Complete boundary (Level 8)
-    ├── tbu_honest_multiagent.py      # Multi-pattern validation
-    │
-    ├── # Constraint Perception (Section R.6)
-    ├── volatility_aware_substrate.py # Level 8+ with regime perception
-    ├── random_channel_substrate.py   # Null test control
-    ├── run_null_test.py              # Three-way comparison
-    ├── run_vol_aware_replication.py  # 5-seed replication
-    │
-    ├── # Mesh Mapping (Appendix T)
-    ├── test_primary_classification.py    # Experiment 1: Primary variables
-    ├── test_secondary_classification.py  # Experiment 2: Secondary variables
-    ├── test_multi_perception.py          # Experiment 3: Hierarchy principle
-    ├── map_constraint_mesh.py            # Full topology scan
-    ├── mesh_connectivity.py              # Graph analysis
-    │
-    ├── # Analysis Tools
-    ├── tbu_honest_reproduce_paper.py     # Reproduction script
-    ├── tbu_reconditioning_scanner.py     # Fingerprint scanner
-    ├── tbu_honest_boundary_reconditioning_logger.py  # CSV logger
-    └── results/
+├── tbu_simulations_v3.py           # Monte Carlo validation script
+├── simulation_config.json          # All parameters
+├── data/
+│   ├── TBU_MC_10000_runs_null.csv      # 10k null hypothesis runs
+│   ├── TBU_MC_10000_runs_signal.csv    # 10k signal injection runs  
+│   ├── TBU_timeseries_run.csv          # 1-hour temporal stability
+│   ├── TBU_extended_simulation_results.csv  # Mass/distance scaling
+│   ├── TBU_alt_mechanisms_vs_TBU.csv   # Mechanism discrimination
+│   └── TBU_entangled_two_path.csv      # Entangled extension
+├── emergence/                      # Observer emergence (real silicon physics)
+│   ├── substrates/                     # Core implementations (L1-9)
+│   ├── tests/                          # 5-seed validation tests
+│   ├── analysis/                       # Mapping tools
+│   ├── runners/                        # Experiment runners
+│   ├── extended/                       # Extended validation (L14, L22, L37-L40)
+│   │   ├── multi_physics_loader.py         # Real physics data loader
+│   │   ├── tbu_level14_canonical_v8.py     # Physics-determined mode count
+│   │   ├── tbu_level22_canonical.py        # Hierarchy depth scaling
+│   │   ├── tbu_level37_canonical.py        # Memory as coupling
+│   │   ├── tbu_level38_canonical.py        # Template persistence
+│   │   ├── tbu_level39_canonical.py        # Pattern identity vs activity
+│   │   └── tbu_level40_canonical.py        # Predictive edge
+│   └── README.md
+└── README.md
 ```
 
-## Three Validation Components
+## Observer Emergence
 
-### 1. Monte Carlo Experimental Validation (Appendix D)
+The `emergence/` folder implements boundary-coupled diffusion dynamics in silicon substrates. The physics (diffusion, damping, forcing) are real physical processes—not simulations of physics. The substrate provides geometric room for structure to emerge; N[ω] maximization determines what persists.
 
-Tests whether the predicted ε_eff ~ 10⁻⁶ correlations are detectable with proposed methodology.
+**Core methodology**: Extend substrate → Let physics select → Measure what emerges
 
-- **Code**: `tbu_simulations_v3.py`
-- **Data**: `data/` folder (10,000 realizations)
-- **Result**: Detection methodology validated at 5σ significance
+Key findings validated with 5 seeds:
+- **Hierarchy Principle**: Variables form measurable hierarchy by coherence impact
+- **Sign-Flip Phenomenon**: Eliminated with regime perception
+- **Saturation Principle**: One clean primary channel is sufficient
+- **Physics-Determined Mode Count**: Interior physics supports ~2-3 independent modes
+- **Memory as Coupling**: Long-term memory access behaves as re-entry, not retrieval
 
-### 2. Emergence Validation (Appendix R)
+See `emergence/README.md` for full documentation.
 
-Tests whether observer-like structure emerges from N[ω] selection alone.
+## Data Files
 
-- **Code**: `emergence/` folder
-- **Methodology**: "Honest substrate"—M is diagnostic only, never fed back into dynamics
-- **Result**: Hierarchy, self-reference, coherence, and autonomy all emerge from uniform initial conditions
+### TBU_MC_10000_runs_signal.csv
+Signal injection Monte Carlo (10,000 runs). Validates detection of ε_eff = 9.31 × 10⁻⁷ in realistic noise.
 
-| Level | File | Key Result |
-|-------|------|------------|
-| 1–2 | `tbu_honest.py` | 9,091× differentiation, χ = 1/(1+M) with R² = 0.995 |
-| 3 | `tbu_honest_extended.py` | Self-reference localisation (89% vs 12%) |
-| 4–5 | `tbu_honest_action.py` | Agency and sensorimotor closure |
-| 8 | `tbu_honest_boundary.py` | Sustainable action (67% consumption reduction) |
-| 8+ | `volatility_aware_substrate.py` | Constraint perception eliminates sign-flip |
-| — | `tbu_honest_multiagent.py` | Shared equilibrium across multiple patterns |
+- `epsilon_phys`: 9.31 × 10⁻⁷ (injected signal)
+- `beta_hat`: Recovered correlation coefficient
+- `deltaBIC_dbu_vs_null`: Model comparison (>10 indicates strong TBU evidence)
 
-### 3. Constraint Perception & Mesh Mapping (Section R.6, Appendix T)
+### TBU_MC_10000_runs_null.csv  
+Null hypothesis Monte Carlo (10,000 runs). Confirms no false positives when signal absent.
 
-Tests the structure of the constraint mesh and establishes the hierarchy principle.
+- `beta_hat`: Should be ~0 with no systematic bias
+- False positive rate: <0.1%
 
-**Section R.6 - Perception eliminates sign-flip:**
+### TBU_timeseries_run.csv
+One-hour continuous observation (3,600 seconds). Demonstrates per-hour SNR = 0.58.
 
-| Condition | r_pooled | Sign-flip | Interpretation |
-|-----------|----------|-----------|----------------|
-| Baseline (6 ch, regime-blind) | +0.01 | YES | Regime blindness → washout |
-| Volatility-Aware (7 ch, has info) | +0.92 | no | Perception → unified coupling |
-| Random Channel (7 ch, NO info) | −0.00 | YES | Noise doesn't help |
+- `eps_hat`: Measured correlation per second
+- Mean: 9.31 × 10⁻⁷
+- Std: 1.6 × 10⁻⁶
+- SNR: 0.58
 
-**Appendix T - Hierarchy principle:**
+### TBU_extended_simulation_results.csv
+Parameter space exploration across mass (0–2 kg) and distance (0.1–0.5 m).
 
-| Configuration | Δ from Baseline | Classification |
-|---------------|-----------------|----------------|
-| boundary_volatility | +0.918 | DOMINANT PRIMARY |
-| env_health alone | −0.249 | HARMFUL (secondary without context) |
-| Both together | +0.926 | Super-additive |
+Key validation: Mass slope at d = 0.25 m
+- Slope: (2.30 ± 0.09) × 10⁻⁶ kg⁻¹
+- R² = 0.9973
+- Intercept consistent with zero
 
-**Key finding:** Primary (regime-defining) variables must be perceived before secondary variables become beneficial. Perceiving secondary variables without primary context actively degrades coherence.
+### TBU_alt_mechanisms_vs_TBU.csv
+Mechanism discrimination test (Section 7.6.1). Distinguishes TBU from systematics:
 
-See [emergence/README.md](emergence/README.md) for details.
+| Mechanism | Mass Dependence | Signature |
+|-----------|-----------------|-----------|
+| TBU | Linear in M | ε ∝ M_ext |
+| EM cross-talk | Independent | Constant |
+| Thermal drift | Independent | Correlated noise |
+| Detector mismatch | Independent | Static bias |
 
-## Quick Start
+### TBU_entangled_two_path.csv
+Two-path entangled photon predictions. Joint correlation: ε_joint = √(ε_A × ε_B).
 
-### Monte Carlo Validation
+## Detection Feasibility
 
-```bash
+For 5σ detection of ε = 9.3 × 10⁻⁷:
+
+```
+Standard error required: SE = 9.3×10⁻⁷ / 5 = 1.86×10⁻⁷
+Hourly scatter: σ ≈ 1.6×10⁻⁶  
+Hours needed: N = (σ/SE)² = (1.6×10⁻⁶ / 1.86×10⁻⁷)² ≈ 74 hours
+Total photons: 74 hr × 3600 s × 4.5×10⁶/s ≈ 1.2×10¹²
+```
+
+## Reproducing Results
+
+All Monte Carlo runs are deterministic with `np.random.seed(42)`:
+
+```python
 python tbu_simulations_v3.py
 ```
 
-### Emergence Validation
-
-```bash
-cd emergence
-
-# Core emergence (Levels 1–2)
-python tbu_honest.py
-
-# Extended validation (Level 3)
-python tbu_honest_extended.py
-
-# Full substrate ladder
-python tbu_honest_action.py
-python tbu_honest_boundary.py
-python tbu_honest_multiagent.py
-
-# Reproduce all Appendix R claims
-python tbu_honest_reproduce_paper.py --all
-```
-
-### Constraint Perception Validation (Section R.6)
-
-```bash
-cd emergence
-
-# Three-way comparison (baseline vs volatility vs random)
-python run_null_test.py
-
-# 5-seed replication
-python run_vol_aware_replication.py
-```
-
-### Mesh Mapping (Appendix T)
-
-```bash
-cd emergence
-
-# Variable classification
-python test_primary_classification.py
-python test_secondary_classification.py
-
-# Hierarchy principle (super-additive compounding)
-python test_multi_perception.py
-
-# Full mesh topology
-python map_constraint_mesh.py
-python mesh_connectivity.py
-```
-
-## Requirements
-
-```
-numpy>=1.20
-scipy>=1.7
-matplotlib>=3.4
-```
-
-Optional for extended analysis:
-```
-pandas
-statsmodels
+Verify key outputs:
+```python
+import pandas as pd
+df = pd.read_csv('data/TBU_timeseries_run.csv')
+print(f"Mean: {df.eps_hat.mean():.3e}")  # → 9.31e-7
+print(f"Std: {df.eps_hat.std():.3e}")    # → 1.6e-6
+print(f"SNR: {df.eps_hat.mean()/df.eps_hat.std():.2f}")  # → 0.58
 ```
 
 ## Citation
 
+If using this code or data:
+
 ```bibtex
-@article{artz2025tbu,
-  title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
+@article{TBU2025,
+  title={The Everywhen: Unifying Quantum and Classical Mechanics 
+         through 4D Thermodynamics},
   author={Artz, Gavin},
-  year={2025},
 }
 ```
 
 ## License
 
-MIT License - see [LICENSE](LICENSE)
-
+MIT License. See LICENSE file.
 ## Contact
 
 - Email: gavinartz@gmail.com
