@@ -1,6 +1,12 @@
 # TBU Observer Emergence
 
-Simulation code for observer emergence in the Thermodynamic Block Universe framework.
+Implementation of observer emergence in the Thermodynamic Block Universe framework using real silicon physics.
+
+## Overview
+
+This code implements boundary-coupled diffusion dynamics in silicon substrates. The physics (diffusion, damping, forcing) are real physical processes—not simulations of physics. The substrate provides geometric room for structure to emerge; N[ω] maximization determines what persists.
+
+**Core methodology**: Extend substrate → Let physics select → Measure what emerges
 
 ## Directory Structure
 
@@ -10,6 +16,7 @@ emergence/
 ├── tests/               # Validation tests (5-seed)
 ├── analysis/            # Mapping and analysis tools
 ├── runners/             # Experiment runners
+├── extended/            # Extended validation (Levels 14, 22, 37)
 ├── results/             # Output data
 └── README.md
 ```
@@ -42,6 +49,16 @@ All tests validated with 5 seeds (42-46).
 | `test_primary_classification.py` | Variable classification | Hierarchy emerges |
 | `test_secondary_classification.py` | Secondary behavior | Context-dependent |
 | `test_multi_perception.py` | Multi-channel perception | Mesh connectivity |
+
+## Extended Validation (Levels 12-40)
+
+Supporting interpretive claims in the paper.
+
+| File | Level | Finding |
+|------|-------|---------|
+| `tbu_level14_canonical_v8.py` | 14 | d_eff ≈ 1.68 (physics-determined mode count) |
+| `tbu_level22_canonical.py` | 22 | Hierarchy depth scales with reconditioning modes |
+| `tbu_level37_canonical.py` | 37 | Memory as coupling (+0.220 / -0.151) |
 
 ## Analysis Tools
 
@@ -83,6 +100,9 @@ Independent geometric content provides only 35% alone.
 Interior physics supports ~2-3 independent modes (d_eff ≈ 1.68).
 Additional perception channels cannot access nonexistent structure.
 
+### Coupling as Memory
+Memory is not storage—memory is coupling strength. Repetition strengthens (+0.220), absence degrades (-0.151).
+
 ## Usage
 
 ```bash
@@ -97,6 +117,9 @@ python tests/test_robustness.py
 
 # Run null test comparison
 python runners/run_null_test.py
+
+# Extended validation
+python extended/tbu_level22_canonical.py --test sanity
 ```
 
 ## Requirements
@@ -110,7 +133,7 @@ python runners/run_null_test.py
 If using this code, please cite:
 ```
 Artz, G. (2025). The Everywhen: Unifying Quantum and Classical Mechanics 
-through 4D Thermodynamics. Foundations of Physics (submitted).
+through 4D Thermodynamics. 
 ```
 
 ## License
