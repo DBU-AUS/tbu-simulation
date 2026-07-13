@@ -195,18 +195,13 @@ If using this code or data:
 ```bibtex
 @article{TBU2025,
   title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
-  author={Artz, Gavin},
+  author={Modry Robota},
 }
 ```
 
 ## License
 
 MIT License. See LICENSE file.
-
-## Contact
-
-- Email: gavinartz@gmail.com
-- ORCID: 0009-0006-5089-8447
 
 ## Archive
 
