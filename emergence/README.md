@@ -147,7 +147,7 @@ The memory findings (L37-L40) provide empirical grounding for the ceremony secti
 ```bibtex
 @article{artz2025tbu,
   title={Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions},
-  author={Artz, Gavin},
+  author={Modry Robota},
   
 }
 ```
@@ -156,8 +156,6 @@ The memory findings (L37-L40) provide empirical grounding for the ceremony secti
 
 MIT License
 
-## Contact
 
-Gavin Artz - gavinartz@gmail.com
 
 Repository: https://github.com/DBU-AUS/tbu-simulation
