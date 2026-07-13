@@ -1,6 +1,6 @@
 # TBU Framework Repository
 
-Validation suite for **"Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"** (submitted to Foundations of Physics).
+Validation suite for **"Entropy Maximisation under Conservation Constraints on 4D Geometries: Testable Predictions"**.
 
 ## Overview
 
